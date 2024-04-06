@@ -1,23 +1,77 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+
+import Navbar from "./Componets/Navbar";
+import Sidebar from "./Componets/Sidebar";
+import Form from "./Componets/Form";
+import Notes from "./Componets/Notes/Notes";
+import Modal from "./Componets/Modal/Modal";
+
+const NOTES = [
+  {
+    id: "1234",
+    title: "some tittle",
+    text: "pool",
+  },
+];
 
 function App() {
+  const [notes, setNotes] = useState(NOTES);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedNote, setSelectedNote] = useState({});
+
+  const addNote = (note) => {
+    setNotes((prevNotes) => {
+      return [...prevNotes, note];
+    });
+  };
+
+  const deleteNote = (id) => {
+    setNotes((prevNotes) => {
+      return prevNotes.filter((note) => id !== note.id);
+    });
+  };
+
+  const editNote = (editedNote) =>{
+    
+    setNotes(prevState => {
+      const newArray = notes.map(note =>{
+        if(editNote.id === note.id){
+          note.title = editNote.title
+          note.text = editNote.text
+        }
+        return note;
+      })
+      return newArray 
+    })
+  }
+
+  const toggleModal = () => {
+    setIsModalOpen((prevState) => {
+      return !prevState;
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar />
+      <Sidebar />
+      <Form addNote={addNote} />
+      <Notes
+        notes={notes}
+        deleteNote={deleteNote}
+        // setIsModalOpen={setIsModalOpen}
+        setSelectedNote={setSelectedNote}
+        toggleModal={toggleModal}
+      />
+      {isModalOpen && (
+        <Modal
+          isModalOpen={isModalOpen}
+          selectedNote={selectedNote}
+          toggleModal={toggleModal}
+          editNote={editNote}
+        />
+      )}
     </div>
   );
 }
