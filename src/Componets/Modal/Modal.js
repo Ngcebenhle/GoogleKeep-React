@@ -1,23 +1,38 @@
 import React from "react";
 import "./Modal.css";
 import Form from "../Form";
+import { useState } from "react";
 
 const Modal = (props) => {
-  const { isModalOpen, selectedNote, setIsModalOpen, toggleModal, editNote } =
+  const { isModalOpen, selectedNote, toggleModal, editNote } =
     props;
 
+
+    // const [isModalCurser, setIsModalCurser] = useState(false);
+    // const modalCursorOn = () => {setIsModalCurser(true)}
+    // const modalCursorOff = () => {setIsModalCurser(false)}
+  
   // const closeModalHanhle = () =>{
   //   // setIsModalOpen(false)
   //   toggleModal();
 
   // }
+
+  // const close = () =>{
+  //   if(isModalCurser == false){
+  //     setIsA
+  //   }
+  // }
   return (
     <div>
       <div
         className={`modal ${isModalOpen ? "open-modal" : ""}`}
-        onClick={toggleModal}
+        // onClick={toggleModal}
       >
-        <div className="modal-content">
+        <div className="modal-content"
+        // onMouseOut={modalCursorOff}
+        // onMouseOver={modalCursorOn}
+        >
           <Form
             edit
             selectedNote={selectedNote}

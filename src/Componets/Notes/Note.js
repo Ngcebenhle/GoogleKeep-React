@@ -1,29 +1,30 @@
 import React, { useState } from "react";
 
 const Note = (props) => {
-  const { note, deleteNote, setSelectedNote, toggleModal } =
+  const { note, deleteNote, setSelectedNote,setIsModalOpen } =
     props;
 
   
    
     const openModal = () => {
-    // props.setIsModalOpen(true);
-    toggleModal()
+      setSelectedNote(note);
+      setIsModalOpen(true);
+    // toggleModal()
   };
-  const [tittle, setTitle] = useState(note.title)
-  const [Text, setText] = useState(note.text)
-  const [isHover, setIsHover] = useState(false);
+  // const [tittle, setTitle] = useState(note.title)
+  // const [Text, setText] = useState(note.text)
+  const [isHover, setIsHover] = useState(true);
 
   const hoverOverHandler = (e) => {
-    setIsHover(true);
+     setIsHover(true);
   };
   const hoverOutHandler = (e) => {
-    setIsHover(false);
+     setIsHover(false);
   };
 
   const noteDeleHandler = () => {
-    deleteNote(note.id)
-    setSelectedNote(note.id);
+    setIsModalOpen(false);
+    deleteNote(note.id);
     /// why is this not setting the id of the current needed note ???????
   };
 
@@ -31,7 +32,7 @@ const Note = (props) => {
     <div
       className="note"
       id={note.id}
-      onClick={openModal}
+      
       onMouseOver={hoverOverHandler}
       onMouseOut={hoverOutHandler}
     >
@@ -41,11 +42,14 @@ const Note = (props) => {
         </span>
       )}
 
-      <div className="title">{note.title}</div>
+     <div onClick={openModal}> 
+     <div className="title">{note.title}</div>
       <div className="text">{note.text}</div>
+     </div>
 
       {isHover && (
-        <div className="note-footer">
+       <div>
+         <div className="note-footer">
           <div className="tooltip">
             <span className="material-symbols-outlined hover small-icon">
               add_alert
@@ -83,6 +87,7 @@ const Note = (props) => {
             <span className="tooltip-text">More</span>
           </div>
         </div>
+       </div>
       )}
     </div>
   );

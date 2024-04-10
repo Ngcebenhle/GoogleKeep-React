@@ -3,7 +3,7 @@ import "./Notes.css";
 import Note from "./Note";
 
 const Notes = (props) => {
-  const { notes, deleteNote, setSelectedNote, toggleModal } =
+  const { notes, deleteNote, setSelectedNote, toggleModal, setIsModalOpen } =
     props;
 
   return (
@@ -16,7 +16,7 @@ const Notes = (props) => {
             key={index}
             note={note}
             deleteNote={deleteNote}
-            // setIsModalOpen={setIsModalOpen}
+            setIsModalOpen={setIsModalOpen}
             setSelectedNote={setSelectedNote}
             toggleModal={toggleModal}
             
