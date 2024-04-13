@@ -10,7 +10,7 @@ import Modal from "./Componets/Modal/Modal";
 const NOTES = [];
 
 function App() {
-  const edit = undefined;
+
   const [notes, setNotes] = useState(NOTES);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedNote, setSelectedNote] = useState({});

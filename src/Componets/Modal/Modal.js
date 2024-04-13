@@ -1,7 +1,7 @@
 import React from "react";
 import "./Modal.css";
 import Form from "../Form";
-import { useState } from "react";
+
 
 const Modal = (props) => {
   const { isModalOpen, selectedNote, toggleModal, editNote } =
